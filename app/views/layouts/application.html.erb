@@ -19,7 +19,10 @@
           <a class="brand" href="#">Group Event</a>
           <div class="nav-collapse">
             <ul class="nav">
-              <li class="active"><a href="#">Home</a></li>
+				<%= nav_link("Home", '/' ) %>
+				<%= nav_link("Restaurants", restaurants_path) %>
+				<%= nav_link("Users", users_path) %>
+				
             </ul>
           </div><!--/.nav-collapse -->
         </div>
