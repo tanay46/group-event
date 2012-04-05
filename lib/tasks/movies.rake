@@ -4,13 +4,15 @@ namespace :movies do
     puts "Starting to read csv.."
     require 'csv'
     movies = Hash.new
-    CSV.open('movies.csv', 'r', ',') do |row|
-      for col in row
-        movie_a = col.split(/:/)
-        if not movies[movie_a[1]]
-          movies[movie_a[1]]=movie_a[0].to_i
-        else
-          movies[movie_a[1]] = movies[movie_a[1]] + movie_a[0].to_i
+    CSV.open('movies.csv', 'rb') do |row|
+      for x in row
+        for col in x
+          movie_a = col.split(/:/)
+          if not movies[movie_a[1]]
+            movies[movie_a[1]]=movie_a[0].to_i
+          else
+            movies[movie_a[1]] = movies[movie_a[1]] + movie_a[0].to_i
+          end
         end
       end
     end
