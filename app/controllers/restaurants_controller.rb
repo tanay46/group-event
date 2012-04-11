@@ -1,4 +1,5 @@
 class RestaurantsController < ApplicationController
+  skip_before_filter :authorize, :only=>[:show, :index]
   # GET /restaurants
   # GET /restaurants.json
   def index

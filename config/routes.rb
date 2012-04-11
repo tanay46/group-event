@@ -1,13 +1,27 @@
 Groupevent::Application.routes.draw do
   
-  resources :users
+  
+  resources :users 
 
-  resources :events
+  resources :events do
+    member do
+      get 'rank'
+    end
+  end
 
   resources :restaurants
 
   match 'home' => 'application#home'
   root :to => 'events#index'
+  
+  controller :sessions do
+    get 'login' => :new
+    post 'login' => :create
+    get 'logout' => :destroy
+    delete 'logout' => :destroy
+end
+  
+  
   # The priority is based upon order of creation:
   # first created -> highest priority.
 

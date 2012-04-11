@@ -4,6 +4,12 @@ This is a web application which helps groups to plan events. It is my project fo
 
 ## Updates:
 
+### Week 4:
+
+- Added Authentication System
+- Adapted Authentication System so non-logged in users can see Events and Restaurants but cannot create or delete them
+- Added member route for rank action
+
 ### Week 3:
 
 - Added Validations on models

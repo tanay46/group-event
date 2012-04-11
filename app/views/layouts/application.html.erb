@@ -21,8 +21,12 @@
             <ul class="nav">
 				<%= nav_link("Home", '/' ) %>
 				<%= nav_link("Restaurants", restaurants_path) %>
-				<%= nav_link("Users", users_path) %>
-				
+				<% if session[:user_id] %>
+				<%= nav_link("Logout", logout_path) %>
+				<% else %>
+				<%= nav_link("Sign up", new_user_path)%>
+				<%= nav_link("Login", users_path) %>
+				<% end %>				
             </ul>
           </div><!--/.nav-collapse -->
         </div>

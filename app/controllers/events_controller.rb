@@ -1,4 +1,5 @@
 class EventsController < ApplicationController
+  skip_before_filter :authorize, :only=>[:show, :index]
   # GET /events
   # GET /events.json
   def index
@@ -79,5 +80,8 @@ class EventsController < ApplicationController
       format.html { redirect_to events_url }
       format.json { head :no_content }
     end
+  end
+  
+  def rank
   end
 end
