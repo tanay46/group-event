@@ -6,6 +6,7 @@ Groupevent::Application.routes.draw do
   resources :events do
     member do
       get 'rank'
+      post 'rank'
     end
   end
 

@@ -1,11 +1,22 @@
 <%= semantic_form_for @event do |f| %>
-  <%= f.inputs %>
-  <div class="field">
-	Suggested Restaurants<br/>
-	<% Restaurant.all.each do |restaurant| %>
-    <%= check_box_tag :restaurant_ids, restaurant.id, @event.restaurants.include?(restaurant), :name => 'event[restaurant_ids][]' %><%= restaurant.name %>
-    <br/>
+	<%= f.inputs do %>
+	<%= f.input :name, :as => :wrapped_string %>
+	<%= f.input :date, :as => :datetime %>	
 	<% end %>
+  <div class="field">
+	<h3>Suggested Restaurants</h3>
+	<% Restaurant.all.each do |restaurant| %>
+	<label class="checkbox">
+    <%= check_box_tag :restaurant_ids, restaurant.id, @event.restaurants.include?(restaurant), :name => 'event[restaurant_ids][]' %><%= restaurant.name %>
+	</label>
+	<% end %>
+	<h3>Invite:</h3>
+	<% User.all.each do |user| %>
+	<label class="checkbox">
+    <%= check_box_tag :user_ids, user.id, @event.users.include?(user), :name => 'event[user_ids][]' %><%= user.name %>
+	</label>
+	<% end %>
+	
   </div>
   <%= f.actions do %>
     <%= f.action :submit, :button_html => { :class => "btn" } %>

@@ -1,9 +1,13 @@
 class EventsController < ApplicationController
-  skip_before_filter :authorize, :only=>[:show, :index]
+  before_filter :require_admin, :only=>[:new, :create, :destroy, :update]
   # GET /events
   # GET /events.json
   def index
-    @events = Event.all
+    if current_user.role == "Admin"
+      @events = Event.all
+    else
+      @events = current_user.events
+    end
 
     respond_to do |format|
       format.html # index.html.erb
@@ -69,7 +73,6 @@ class EventsController < ApplicationController
       end
     end
   end
-
   # DELETE /events/1
   # DELETE /events/1.json
   def destroy
@@ -83,5 +86,28 @@ class EventsController < ApplicationController
   end
   
   def rank
+    @event = Event.find(params[:id])
+
+    if params[:suggestions]
+      for suggestion in @event.suggestions
+
+        ranking = Ranking.where(:suggestion_id => suggestion.id, :user_id => current_user.id).first
+
+        if ranking
+          if params[:suggestions][suggestion.id.to_i]
+            ranking.position = params[:suggestions][suggestion.id.to_i]
+          else
+            ranking.position = 0
+          end
+          ranking.save
+        else
+          ranking = Ranking.create(:suggestion_id => suggestion.id, 
+                                  :user_id => current_user.id, 
+                                  :position => params[:suggestions][suggestion.id.to_s])
+        end
+      end
+      redirect_to event_path(@event)
+    end
   end
+  
 end

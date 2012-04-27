@@ -7,34 +7,7 @@
   <%= csrf_meta_tags %>
 </head>
 <body>
-	
-	<div class="navbar navbar-fixed-top">
-      <div class="navbar-inner">
-        <div class="container">
-          <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-          </a>
-          <a class="brand" href="#">Group Event</a>
-          <div class="nav-collapse">
-            <ul class="nav">
-				<%= nav_link("Home", '/' ) %>
-				<%= nav_link("Restaurants", restaurants_path) %>
-			</ul>
-			<ul class="nav" style="float:right;">
-				<% if session[:user_id] %>
-				<li style="color:white; padding:10px"><%= User.find(session[:user_id]).email %></li>
-				<%= nav_link("Logout", logout_path) %>
-				<% else %>
-				<%= nav_link("Sign up", new_user_path)%>
-				<%= nav_link("Login", users_path) %>
-				<% end %>				
-           	</ul>
-          </div><!--/.nav-collapse -->
-        </div>
-      </div>
-    </div>
+	<%= render "header" %>
     <div class="container">
 <%= yield %>
 <%= render "footer" %>

@@ -1,4 +1,5 @@
 class RestaurantsController < ApplicationController
+  before_filter :require_admin, :only=>[:update, :destroy]
   skip_before_filter :authorize, :only=>[:show, :index]
   # GET /restaurants
   # GET /restaurants.json

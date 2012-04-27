@@ -1,5 +1,6 @@
 class UsersController < ApplicationController
   skip_before_filter :authorize, :only=>[:new,:create]
+  before_filter :require_admin, :only=>[:index, :destroy]
   # GET /users
   # GET /users.json
   def index
@@ -42,6 +43,7 @@ class UsersController < ApplicationController
   # POST /users.json
   def create
     @user = User.new(params[:user])
+    @user.role = "User"
 
     respond_to do |format|
       if @user.save

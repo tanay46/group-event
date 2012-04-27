@@ -1,0 +1,22 @@
+<h1><%= @event.name %></h1>
+<br/>
+<%= semantic_form_for :suggestions , :url => rank_event_url(@event), :html => {:method => :post } do |f| %>
+
+	Suggested Restaurants:<br /><br />
+	<%= f.inputs do %>
+		<% @event.suggestions.each do |suggestion| %>
+
+			<% ranking = Ranking.where(:suggestion_id => suggestion.id, :user_id => current_user.id).first %>
+
+			<%= f.input "#{suggestion.id}", :as => :select, :collection => 1..@event.suggestions.length, 
+						:selected => ranking.nil? ? '' : ranking.position, 
+						:label => suggestion.restaurant.name, :include_blank => false %>
+			<% end %>
+	<% end %>
+
+	<%= f.actions do %>
+		<%= f.action :submit, :as => :button, :label => "Rank" %>
+	<% end %>
+
+
+<% end %>

@@ -11,11 +11,12 @@
 
 <% @restaurants.each do |restaurant| %>
   <tr>
-    <td><%= restaurant.name %></td>
+    <td><%= link_to restaurant.name, restaurant%></td>
     <td><%= restaurant.address %></td>
-    <td><%= link_to 'Show', restaurant %></td>
-    <td><%= link_to 'Edit', edit_restaurant_path(restaurant) %></td>
-    <td><%= link_to 'Destroy', restaurant, confirm: 'Are you sure?', method: :delete %></td>
+	<% if current_user.role == "Admin" %>
+    <td><%= link_to 'Edit', edit_restaurant_path(restaurant), :class => 'btn-mini btn-primary'  %></td>
+    <td><%= link_to 'Delete', restaurant, confirm: 'Are you sure?', method: :delete, :class => 'btn-mini btn-primary'  %></td>
+	<%end %>
   </tr>
 <% end %>
 </table>

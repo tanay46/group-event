@@ -1,20 +1,17 @@
 <p id="notice"><%= notice %></p>
 
-<p>
-  <b>Name:</b>
-  <%= @event.name %>
-</p>
+<h2><%= @event.name %></h2>
+<h3><%= @event.date %></h3>
 
-<p>
-  <b>Date:</b>
-  <%= @event.date %>
-</p>
+<b>Suggested Restaurants</b><br/>
+	<% for restaurant in @event.restaurants %>
+		<%= restaurant.name %>
+		<br/>
+	<% end %>
+<br/><br/>
 
-<p>
-  <b>Start:</b>
-  <%= @event.start %>
-</p>
-
-
-<%= link_to 'Edit', edit_event_path(@event) %> |
-<%= link_to 'Back', events_path %>
+<% if current_user.role == "Admin" %>
+<%= link_to 'Edit', edit_event_path(@event) %>
+<% end %>
+<%= link_to "Rank", rank_event_url(@event), :class => 'btn btn-primary'%>
+<%= link_to 'Back', events_path, :class => 'btn btn-primary' %>
