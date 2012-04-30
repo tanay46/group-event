@@ -9,7 +9,8 @@ This is a web application which helps groups to plan events. It is my project fo
 - Added models for invitations and rankings
 - Set permissions for creating events etc
 - Allowed event creator to invite users
-- Allowed users to rank items
+- Allowed users to suggest restaurants
+- Allowed users to rank restaurants
 - Added a logo, updated UI
 - Use abc@gmail.com pass:test for testing
 - Admin account: tjj2112@columbia.edu pass:test
