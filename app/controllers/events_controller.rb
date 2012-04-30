@@ -110,4 +110,32 @@ class EventsController < ApplicationController
     end
   end
   
+  def desc_rest
+			Restaurant.all()
+	end  
+	helper_method :desc_rest
+	
+	def create_suggestions
+		@event= Event.find(params[:id])
+
+		for id in params[:restaurants][:restaurants]
+			unless id.blank?
+			restaurant = Restaurant.find(id)
+			@event.restaurants<< restaurant
+			end
+		end	
+		if @event.save
+				respond_to do |format|
+        format.html { redirect_to @event, notice: 'Restaurant added' }
+        format.json { render json: @event, status: :created, location: @event }
+				end
+     else
+				respond_to do |format|
+        format.html { render action: "show" }
+        format.json { render json: @event.errors, status: :unprocessable_entity }
+				end
+     end
+	end
+	
+  
 end

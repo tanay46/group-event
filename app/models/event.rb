@@ -2,7 +2,6 @@ class Event < ActiveRecord::Base
   
   has_many :suggestions, :dependent => :destroy
   has_many :restaurants, :through => :suggestions
-  
   has_many :invitations, :dependent => :destroy
   has_many :users, :through => :invitations
   

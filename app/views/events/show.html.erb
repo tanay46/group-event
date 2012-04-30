@@ -10,6 +10,15 @@
 	<% end %>
 <br/><br/>
 
+<b>Suggest Restaurants</b><br/>
+<%= semantic_form_for :restaurants, :url =>create_suggestions_event_url(@event), :html => {:method => :post}  do |f| %>
+	<%= f.inputs do %>	
+		<%= f.input :restaurants, :as => :check_boxes, :collection => Restaurant.all %> 
+	<%end%>
+	<%= f.action :submit %>
+<%end%>
+<br/><br/>
+
 <% if current_user.role == "Admin" %>
 <%= link_to 'Edit', edit_event_path(@event) %>
 <% end %>

@@ -24,13 +24,5 @@ class ApplicationController < ActionController::Base
     unless current_user.role == "Admin"
       redirect_to :back, notice: "You can't do that!"
     end
-  end
-  
-  def is_admin
-    unless current_user.role == "Admin"
-      return false
-    end
-    return true
-  end
-  
+  end  
 end

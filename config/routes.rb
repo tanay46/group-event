@@ -7,6 +7,7 @@ Groupevent::Application.routes.draw do
     member do
       get 'rank'
       post 'rank'
+      post 'create_suggestions'
     end
   end
 
