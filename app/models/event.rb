@@ -15,12 +15,13 @@ class Event < ActiveRecord::Base
     users = self.users
     restaurants = Hash.new
     for user in user
-      rankings = rankings(user)
-      if not restaurants[rankings.suggestion.restaurant.id]
-        restaurants[rankings.suggestion.restaurant.id]=rankings.position
-      else
-        restaurants[rankings.suggestion.restaurant.id] += rankings.position
-      end    
+      for suggestion in user.suggestions
+        if not restaurants[suggestion.restaurant.id]
+          restaurants[suggestion.restaurant.id]=rankings.position
+        else
+          restaurants[suggestion.restaurant.id] += rankings.position
+        end
+      end
     end
   end
   
